@@ -1,0 +1,100 @@
+﻿@page "/myadhaar"
+@using Digitize.Shared.Data
+@inject HttpClient Http
+
+<PageTitle>Aadhaar</PageTitle>
+
+<h1>Aadhaar Details</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<div class="row">
+    <div class="col">
+        <label>Input Aadhar Number</label>
+    </div>
+
+    <div class="col">
+        <input type="text" @bind-value=@Uid />
+    </div>
+    
+    <div class="col">
+        <button @onclick=@SearchAdhaar>Search</button>
+    </div>
+
+    <div class="col">
+        <button @onclick=@RemoveAdhaar>Delete</button>
+    </div>
+    <p>@DeleteMessage</p>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <label>Aadhar Number</label>
+    </div>
+    <div class="col">
+        <input type="text" @bind-value=@aadhaar.UidNo />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label>Name</label>
+    </div>
+    <div class="col">
+        <input type="text" @bind-value=@aadhaar.Name />
+    </div>
+</div>
+
+<div class="row">
+<label>FatherName</label>
+<input type="text" @bind-value=@aadhaar.FatherName />
+</div>
+
+<div class="row">
+<label>DOB</label>
+<input type="text" @bind-value=@aadhaar.DOB />
+</div>
+
+<div class="row">
+<label>Address</label>
+<input type="text" @bind-value=@aadhaar.Address />
+</div>
+
+<div class="row">
+<label>Phone</label>
+<input type="text" @bind-value=@aadhaar.Phone />
+</div>
+
+@code {
+    private Aadhaar aadhaar=new();
+    private string? DeleteMessage = "";
+    public int Uid;
+    protected override async Task OnInitializedAsync()
+    {
+      //  aadhaar = await Http.GetFromJsonAsync<Aadhaar>("api/MyDigitize/SelectAadhaar/24");               
+    }
+
+    public async Task SearchAdhaar()
+    {
+        aadhaar = await Http.GetFromJsonAsync<Aadhaar>("api/MyDigitize/SelectAadhaar/" + Uid );
+        DeleteMessage = "";
+        StateHasChanged();
+    }
+
+    public async Task RemoveAdhaar()
+    {
+        var response = await Http.GetFromJsonAsync<int>("api/MyDigitize/RemoveAadhaar/" + Uid);
+
+        if (response==0)
+        {
+            DeleteMessage = "Adhaar " + Uid + " Removed Successfully";
+        }
+        else
+        {
+            DeleteMessage = "Adhaar " + Uid + " not Removed - Failed";
+        }
+
+        StateHasChanged();
+    }
+}

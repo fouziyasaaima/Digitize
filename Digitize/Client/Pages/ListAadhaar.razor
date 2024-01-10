@@ -1,0 +1,53 @@
+﻿@page "/listadhaar"
+@using Digitize.Shared.Data
+@inject HttpClient Http
+
+<PageTitle>Aadhar Display</PageTitle>
+
+<h1>Aadhaar List</h1>
+
+<p>This component demonstrates fetching data from the Aadhaar.</p>
+
+@if (adhaarlist == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdAdhar</th>
+                <th>Name</th>
+                <th>DOB</th>
+                <th>FatherName</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>UidNo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var adhaar in adhaarlist)
+            {
+                <tr>
+                    <td>@adhaar.IdAdhar</td>
+                    <td>@adhaar.Name</td>
+                    <td>@adhaar.DOB</td>
+                    <td>@adhaar.FatherName</td>
+                    <td>@adhaar.Address</td>
+                    <td>@adhaar.Phone</td>
+                    <td>@adhaar.UidNo</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private Aadhaar[]? adhaarlist;
+
+    protected override async Task OnInitializedAsync()
+    {
+        adhaarlist = await Http.GetFromJsonAsync<Aadhaar[]>("api/SelectAllAadhaar");
+    }
+}

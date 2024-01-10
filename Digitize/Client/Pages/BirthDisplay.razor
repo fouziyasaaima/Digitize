@@ -1,0 +1,80 @@
+﻿@page "/birthdisplay"
+
+@using Digitize.Shared.Data
+@inject HttpClient Http
+
+<PageTitle>Birth</PageTitle>
+
+<h1>Birth Details</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<div class="row">
+    <div class="col">
+        <label>Input Birth Number</label>
+    </div>
+
+    <div class="col">
+    <input type="text" @bind-value=@RegNo />
+    </div>
+
+    <div class="col">
+        <button @onclick=@SearchBirth>Search</button>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <label>Birth Number</label>
+    </div>
+    <div class="col">
+        <input type="text" @bind-value=@birth.RegNo />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label>Name</label>
+    </div>
+    <div class="col">
+        <input type="text" @bind-value=@birth.Name />
+    </div>
+</div>
+
+<div class="row">
+    <label>FatherName</label>
+    <input type="text" @bind-value=@birth.FatherName />
+</div>
+
+<div class="row">
+    <label>DOB</label>
+    <input type="text" @bind-value=@birth.DOB />
+</div>
+
+<div class="row">
+    <label>Address</label>
+    <input type="text" @bind-value=@birth.Address />
+</div>
+
+<div class="row">
+    <label>Phone</label>
+    <input type="text" @bind-value=@birth.MotherName />
+</div>
+
+@code {
+    private Birth birth;
+    public int RegNo;
+    protected override async Task OnInitializedAsync()
+    {
+     //   birth = await Http.GetFromJsonAsync<Birth>("api/MyDigitize/SelectBirth/57");
+    }
+
+    public async Task SearchBirth()
+    {
+        birth = await Http.GetFromJsonAsync<Birth>("api/MyDigitize/SelectBirth/" + RegNo);
+        StateHasChanged();
+    }
+}
+
+

@@ -1,0 +1,118 @@
+﻿@page "/voterinfo"
+@using Digitize.Shared.Data
+@inject HttpClient Http
+
+<PageTitle>Voter</PageTitle>
+
+<h1>Voter Details</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<div class="row">
+    <div class="col">
+        <label>Input Voter Number</label>
+    </div>
+
+    <div class="col">
+        <input type="text" @bind-value=@VoterId />
+    </div>
+
+    <div class="col">
+        <button @onclick=@SearchVoter>Search</button>
+    </div>
+
+    <div class="row">
+        <button @onclick=@AddForm>Add</button>
+    </div>
+    
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <label>Voter Number</label>
+    </div>
+    <div class="col">
+        <input type="text" @bind-value=@voter.VoterId />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label>Name</label>
+    </div>
+    <div class="col">
+        <input type="text" @bind-value=@voter.Name />
+    </div>
+</div>
+
+<div class="row">
+    <label>FatherName</label>
+    <input type="text" @bind-value=@voter.FatherName />
+</div>
+
+<div class="row">
+    <label>DOB</label>
+    <input type="text" @bind-value=@voter.DOB />
+</div>
+
+<div class="row">
+    <label>Address</label>
+    <input type="text" @bind-value=@voter.Address />
+</div>
+
+<div class="row">
+    <label>Phone</label>
+    <input type="text" @bind-value=@voter.Phone />    
+</div>
+
+@if (blnAdd == true)
+{
+    <div class="row">
+        <button @onclick=@AddVoter>Submit</button>
+    </div>
+}
+
+<p>@responseMessage</p>
+@code 
+{
+    private Voter voter=new();
+    public int VoterId;
+    private string? responseMessage = "";
+    bool blnAdd = false;
+
+   /* protected override async Task OnInitializedAsync()
+    {
+        voter = null;
+    }*/
+
+    public async Task SearchVoter()
+    {
+        voter = await Http.GetFromJsonAsync<Voter>("api/MyDigitize/SelectVoter/" + VoterId);
+        blnAdd = false;
+        StateHasChanged();
+    }
+
+    public async Task AddVoter()
+    {
+        var response = await Http.PostAsJsonAsync<Voter>("api/MyDigitize/AddVoter", voter);
+        if (response.IsSuccessStatusCode)
+        {
+            responseMessage = "Voter Data Added Successfully";
+
+        }
+        else
+        {
+            responseMessage = "Failed to Add Voter Data";
+        }
+
+        StateHasChanged();
+    }
+
+    void AddForm()
+    {
+        blnAdd = true;
+        voter = null;
+        StateHasChanged();
+    }
+}
