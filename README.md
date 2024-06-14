@@ -25,7 +25,7 @@ Clone the Repository
 First, clone the repository to your local machine using Git:
 
 
-git clone https://github.com/yourusername/Digitize.git
+git clone https://github.com/fouziyasaaima/Digitize.git
 
 cd Digitize
 
