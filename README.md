@@ -50,7 +50,7 @@ Connection String: Update the connection string in the appsettings.json file loc
 
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=your_server_name;Database=DigitizeDb;User Id=your_username;Password=your_password;"
+    "DefaultConnection": "Server=your_server_name;Database=Digitize;User Id=your_username;Password=your_password;"
   }
 }
 Replace your_server_name, your_username, and your_password with your SQL Server details.
