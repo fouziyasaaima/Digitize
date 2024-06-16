@@ -1,12 +1,12 @@
-Digitize - A sample Blazor CRUD Application
+# Digitize - A sample Blazor CRUD Application
 
 Welcome to Digitize, a sample Blazor CRUD (Create, Read, Update, Delete) application that demonstrates basic operations on Aadhaar details using Dapper and Microsoft.Data.SqlClient. This README will guide you through setting up and running the application.
 
 
-Introduction
+## Introduction
 Digitize is a simple Blazor WebAssembly application that illustrates CRUD operations using a SQL Server database. This sample project leverages Dapper, a lightweight ORM, for efficient data access, and Microsoft.Data.SqlClient for database connectivity.
 
-Features
+## Features
 Create new Aadhaar records.
 Read and display a list of Aadhaar records.
 Update existing Aadhaar records.
@@ -14,20 +14,22 @@ Delete Aadhaar records.
 Utilizes Dapper for database interactions.
 Uses Microsoft.Data.SqlClient for database connectivity.
 
-Prerequisites
+## Prerequisites
 Before running the application, ensure you have the following tools installed:
 .NET 6 SDK
 SQL Server (or SQL Server Express)
 Visual Studio 2022 or Visual Studio Code
 
-Getting Started
+## Getting Started
 Clone the Repository
 First, clone the repository to your local machine using Git:
 
-
+''' bash
 git clone https://github.com/fouziyasaaima/Digitize.git
 
+'''
 cd Digitize
+'''
 
 Setup the Database
 Create a Database: Create a SQL Server database named DigitizeDb.
