@@ -24,19 +24,20 @@ Visual Studio 2022 or Visual Studio Code
 Clone the Repository
 First, clone the repository to your local machine using Git:
 
-''' bash
+```bash
 git clone https://github.com/fouziyasaaima/Digitize.git
+```
 
-'''
+```bash
 cd Digitize
-'''
+```
 
 Setup the Database
 Create a Database: Create a SQL Server database named DigitizeDb.
 
 Run the Script: Use the following SQL script to create the Aadhaar table:
 
-
+```
 CREATE TABLE Aadhaar (
     IdAdhar INT PRIMARY KEY IDENTITY(1,1),
     Name NVARCHAR(100),
@@ -46,15 +47,18 @@ CREATE TABLE Aadhaar (
     Phone NVARCHAR(15),
     UidNo BIGINT
 );
+```
 
 Configuration
 Connection String: Update the connection string in the appsettings.json file located in the Digitize.Server project:
 
-{
+```{
   "ConnectionStrings": {
     "DefaultConnection": "Server=your_server_name;Database=Digitize;User Id=your_username;Password=your_password;"
   }
 }
+```
+
 Replace your_server_name, your_username, and your_password with your SQL Server details.
 
 
@@ -64,35 +68,25 @@ Build the solution to restore the dependencies and ensure everything is set up c
 Run the application (F5 in Visual Studio or dotnet run in the terminal).
 The application will be accessible at https://localhost:5001 (or http://localhost:5000).
 
-Project Structure
+## Project Structure
 The solution Digitize consists of the following projects:
 
 Digitize.Server: This project hosts the backend APIs for CRUD operations.
 Digitize.Client: This project contains the Blazor WebAssembly application.
 Digitize.Shared: This project contains shared models and utilities used by both the server and client projects.
 
-Key Files
+## Key Files
 Digitize.Shared/Data/Aadhaar.cs: Defines the Aadhaar class model.
 Digitize.Server/Controllers/MyDigitizeController.cs: Contains API endpoints for CRUD operations.
 Digitize.Client/Pages/AadhaarDisplay.razor: Blazor component for managing Aadhaar records.
 
-Usage
+## Usage
 Adding Records: Use the "Add Aadhaar" form to create new Aadhaar records.
 Viewing Records: The main page displays a list of all Aadhaar records.
 Editing Records: Click the "Edit" button next to a record to update its details.
 Deleting Records: Click the "Delete" button to remove a record from the database.
 
-
-Fork the repository.
-Create a feature branch (git checkout -b feature/your-feature).
-Commit your changes (git commit -m 'Add some feature').
-Push to the branch (git push origin feature/your-feature).
-Open a pull request.
-Please ensure your code adheres to the project's coding standards.
-
-
-
-Contact
+## Contact
 For any questions or inquiries, please contact:
 
 Bandi Fouziya - saftdatasolutions@gmail.com
